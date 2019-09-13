@@ -4,10 +4,19 @@ export declare class SCCAPIRequest{
     static setClientID(clientID: string);
     static requestWithCallbackURLAmountUserInfoStringMerchantIDNotesCustomerIDSupportedTenderTypesClearsDefaultFeesReturnAutomaticallyAfterPaymentError(callbackURL: NSURL, amount: SCCMoney, userInfoString: string, merchantID: string, notes: string, customerID: string, supportedTenderTypes: SCCAPIRequestTenderTypes, clearsDefaultFees: boolean, autoreturn: boolean): SCCAPIRequest;
 };
+
+export declare class SCCAPIResponse {
+    static responseWithResponseURLError(responseURL: NSURL, error?: NSError): SCCAPIResponse;
+    static userInfoString: string,
+    static error: NSError,
+    static successResponse: boolean,
+    static transactionID: string,
+    static clientTransactionID: string,
+}
+
 export declare class SCCMoney{
     static moneyWithAmountCentsCurrencyCodeError(amountCents: number, currencyCode: string);
 };
-
 
 export declare const enum SCCAPIRequestTenderTypes {
 	All = 18446744073709551615,
@@ -22,18 +31,15 @@ export declare class SCCAPIConnection{
     static performRequestError(request: SCCAPIRequest): boolean;
 };
 
-
-
 export class SquarePlugin extends Common {
     public squareReader: any;
     public money: any;
     public connection: any;
-    protected _SCCMoney: SCCMoney; 
+    protected _SCCMoney: SCCMoney;
 
     constructor(){
         super();
     }
-
 
     chargeCustomer(amount: number, note: string = "", clientId: string = "", urlScheme: string = "", currencyCode = "USD"): boolean {
         let cents = amount*100;
@@ -44,6 +50,10 @@ export class SquarePlugin extends Common {
         let success = SCCAPIConnection.performRequestError(request);
         return success;
     }
-    
 
+    decodeResponse = function (url: string) {
+        const responseURL = NSURL.URLWithString(url);
+        const response = SCCAPIResponse.responseWithResponseURLError(responseURL);
+        return response;
+    };
 }
