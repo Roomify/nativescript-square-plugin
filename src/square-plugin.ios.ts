@@ -7,11 +7,11 @@ export declare class SCCAPIRequest{
 
 export declare class SCCAPIResponse {
     static responseWithResponseURLError(responseURL: NSURL, error?: NSError): SCCAPIResponse;
-    static userInfoString: string,
-    static error: NSError,
-    static successResponse: boolean,
-    static transactionID: string,
-    static clientTransactionID: string,
+    static userInfoString: string;
+    static error: NSError;
+    static successResponse: boolean;
+    static transactionID: string;
+    static clientTransactionID: string;
 }
 
 export declare class SCCMoney{
@@ -54,6 +54,13 @@ export class SquarePlugin extends Common {
     decodeResponse = function (url: string) {
         const responseURL = NSURL.URLWithString(url);
         const response = SCCAPIResponse.responseWithResponseURLError(responseURL);
-        return response;
+
+        return {
+          errorMessage: response.error.localizedDescription,
+          successResponse: response.successResponse,
+          transactionID: response.transactionID,
+          clientTransactionID: response.clientTransactionID,
+          userInfoString: response.userInfoString,
+        };
     };
 }
