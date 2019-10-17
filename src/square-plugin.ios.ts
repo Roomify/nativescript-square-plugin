@@ -7,11 +7,11 @@ export declare class SCCAPIRequest{
 
 export declare class SCCAPIResponse {
     static responseWithResponseURLError(responseURL: NSURL, error?: NSError): SCCAPIResponse;
-    static userInfoString: string;
-    static error: NSError;
-    static successResponse: boolean;
-    static transactionID: string;
-    static clientTransactionID: string;
+    userInfoString: string;
+    error: NSError;
+    successResponse: boolean;
+    transactionID: string;
+    clientTransactionID: string;
 }
 
 export declare class SCCMoney{

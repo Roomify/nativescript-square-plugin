@@ -5,11 +5,11 @@ export declare class SCCAPIRequest {
 }
 export declare class SCCAPIResponse {
     static responseWithResponseURLError(responseURL: NSURL, error?: NSError): SCCAPIResponse;
-    static userInfoString: string;
-    static error: NSError;
-    static successResponse: boolean;
-    static transactionID: string;
-    static clientTransactionID: string;
+    userInfoString: string;
+    error: NSError;
+    successResponse: boolean;
+    transactionID: string;
+    clientTransactionID: string;
 }
 export declare class SCCMoney {
     static moneyWithAmountCentsCurrencyCodeError(amountCents: number, currencyCode: string): any;
@@ -20,7 +20,7 @@ export declare const enum SCCAPIRequestTenderTypes {
     Cash = 2,
     Other = 4,
     SquareGiftCard = 8,
-    CardOnFile = 16,
+    CardOnFile = 16
 }
 export declare class SCCAPIConnection {
     static performRequestError(request: SCCAPIRequest): boolean;
@@ -32,5 +32,11 @@ export declare class SquarePlugin extends Common {
     protected _SCCMoney: SCCMoney;
     constructor();
     chargeCustomer(amount: number, note?: string, clientId?: string, urlScheme?: string, currencyCode?: string): boolean;
-    decodeResponse(url: string): array;
+    decodeResponse: (url: string) => {
+        errorMessage: string;
+        successResponse: boolean;
+        transactionID: string;
+        clientTransactionID: string;
+        userInfoString: string;
+    };
 }

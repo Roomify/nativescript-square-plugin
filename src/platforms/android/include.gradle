@@ -9,5 +9,5 @@ android {
 }
 
 dependencies {
-  compile 'com.squareup.sdk:point-of-sale-sdk:2.+'
+  implementation 'com.squareup.sdk:point-of-sale-sdk:2.+'
 }
